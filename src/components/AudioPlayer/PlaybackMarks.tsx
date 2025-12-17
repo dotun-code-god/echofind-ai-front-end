@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BsPlus, BsTrash, BsPlayFill } from "react-icons/bs";
-import { jumpToTime, setIsPlaying, useAudio, type PlaybackMark } from "../../stores/audio";
+import { jumpToTime, setIsPlaying, setPlaybackMarks, useAudio } from "../../stores/audio";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { deletePlaybackMark, fetchPlaybackMarks, savePlaybackMark } from "../../actions/audio";
 import { BeatLoader } from "react-spinners";
@@ -10,7 +10,7 @@ const PlaybackMarks = () => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [newMarkLabel, setNewMarkLabel] = useState("");
     const [newMarkTime, setNewMarkTime] = useState<number>(0);
-    const [bookmarks, setBookmarks] = useState<PlaybackMark[]>([]);
+    const {playBackMarks} = selectedAudio!;
 
     const {data: fetchBookmarks, isLoading, refetch} = useQuery({
         queryKey: ["playback-marks"],
@@ -22,7 +22,7 @@ const PlaybackMarks = () => {
     useEffect(() => {
         if(selectedAudio?.id && fetchBookmarks){
             refetch();
-            setBookmarks(fetchBookmarks.data);
+            setPlaybackMarks(fetchBookmarks.data);
         }
     }, [selectedAudio?.id, fetchBookmarks?.data]);
 
@@ -81,9 +81,9 @@ const PlaybackMarks = () => {
                     </div>
                 ) : (
                     <div className="flex items-center gap-2">
-                        {bookmarks.length > 0 && (
+                        {playBackMarks && playBackMarks.length > 0 && (
                             <div className="flex gap-2 max-w-md overflow-x-auto">
-                                {bookmarks.map((mark) => (
+                                {playBackMarks?.map((mark) => (
                                     <div 
                                         key={mark.id}
                                         className="flex items-center gap-1 bg-blue-600 text-white px-2 py-1 rounded text-xs whitespace-nowrap"
