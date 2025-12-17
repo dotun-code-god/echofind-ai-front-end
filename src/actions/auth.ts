@@ -6,6 +6,7 @@ export type AuthRequestState = {
 }
 
 export const signup = async(state: AuthRequestState, formData: FormData) : Promise<AuthRequestState> => {
+    console.log({state});
     
     const username = formData.get("username")?.toString();
     const email = formData.get("email")?.toString();
