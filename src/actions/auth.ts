@@ -1,5 +1,4 @@
 import api from "../config/axios";
-import { saveCookie } from "../libs/cookies";
 
 export type AuthRequestState = {
     success: boolean;

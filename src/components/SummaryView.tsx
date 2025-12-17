@@ -1,10 +1,9 @@
 import { motion } from "motion/react";
 import { IoSparkles } from "react-icons/io5";
 import { Button } from "../ui/button";
-import { FiClock, FiTag, FiTrendingUp, FiX } from "react-icons/fi";
+import { FiClock, FiTrendingUp, FiX } from "react-icons/fi";
 import { useAudio } from "../stores/audio";
 import { ScrollArea } from "../ui/scroll-area";
-import { Badge } from "../ui/badge";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { generateAudioKeyTopics, generateAudioSummary } from "../actions/audio";
 import { useEffect, useRef, useState } from "react";

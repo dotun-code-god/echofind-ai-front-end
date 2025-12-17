@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { AudioStore, useAudio } from '../stores/audio';
+import { AudioStore } from '../stores/audio';
 import { transcribeAudio, uploadAudio } from '../actions/audio';
 import { useNavigate } from 'react-router';
 

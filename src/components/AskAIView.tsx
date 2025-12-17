@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 import { FiX } from "react-icons/fi";
 import { ScrollArea } from "../ui/scroll-area";
 import { IoSparkles } from "react-icons/io5";
-import { BsClock } from "react-icons/bs";
 import { useState } from "react";
 import { Input } from "../ui/input";
 

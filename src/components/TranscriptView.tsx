@@ -1,6 +1,6 @@
 import {motion} from "motion/react"
 import { Button } from "../ui/button";
-import { FiDownload, FiPlay, FiSearch, FiStar, FiX } from "react-icons/fi";
+import { FiDownload, FiPlay, FiSearch, FiX } from "react-icons/fi";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { AudioStore, jumpToTime, setIsPlaying, useAudio } from "../stores/audio";

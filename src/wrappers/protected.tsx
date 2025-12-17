@@ -1,6 +1,6 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Navigate, useLocation, useParams } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import GlobalLayout from "../layout/global";
 import AuthenticationSkeleton from "../components/SkeletonComponent/AuthenticationSkeleton";
 
