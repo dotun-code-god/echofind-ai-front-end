@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { useAuth } from '../context/AuthContext';
 import {motion} from 'motion/react';
 import { BiSearch } from 'react-icons/bi';
