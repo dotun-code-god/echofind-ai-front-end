@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { useAuth } from "../context/AuthContext";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -51,56 +53,61 @@ const Login = () => {
     }, [response.success]);
     
     return (
-        <div className="flex items-center justify-center h-screen flex-col bg-gradient-to-b from-blue-900 to-black text-white">
-            <div className='fixed top-8 bg-[#fbfbf921] backdrop-blur-xl w-1/2 mx-auto p-4 rounded-full border-[0.01rem] border-white'>
-                <div className='flex items-center justify-between'>
-                    <h1>
-                        <Link to="/">EchoFind</Link>
-                    </h1>
-                </div>
+        <div className="flex items-center justify-center h-screen flex-col bg-gradient-to-b from-blue-900 to-black text-white px-4">
+            <div className='fixed top-6 left-1/2 -translate-x-1/2'>
+                <Link to="/" className="text-xl font-bold">EchoFind</Link>
             </div>
-            
-            <div className="w-[400px] p-5 mx-auto border border-white bg-[#fbfbf921] backdrop-blur-xl">
-                <h1 className="text-lg">Login</h1>
 
-                { response.success ? (
-                        <p className="text-green-600">{response.message}</p>
-                    ) : (
-                        <p className="text-red-600">{response.message}</p>
-                    ) 
-                }
+            <div className="w-full max-w-md p-8 mx-auto rounded-xl shadow-xl bg-white/5 backdrop-blur-md border border-white/10">
+                <div className="mb-4">
+                    <h1 className="text-2xl font-semibold">Welcome back</h1>
+                    <p className="text-sm text-white/80">Sign in to continue to your account</p>
+                </div>
 
-                <div className="mt-4 grid gap-y-4">
-                    <input 
-                        type="text" 
+                {response.message ? (
+                    <div className={`w-full p-3 rounded ${response.success ? 'bg-green-900/40 text-green-300' : 'bg-red-900/40 text-red-300'}`}>
+                        {response.message}
+                    </div>
+                ) : null}
+
+                <div className="mt-4 grid gap-y-3">
+                    <Input
+                        type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="border w-full p-3 outline-none" 
-                        placeholder="Enter your username" 
-                        />
-                    <input 
-                        type="password" 
+                        placeholder="Username or email"
+                        aria-label="username"
+                    />
+                    <Input
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="border w-full p-3 outline-none" 
-                        placeholder="Enter your password" 
+                        placeholder="Password"
+                        aria-label="password"
                     />
                 </div>
 
-                <div className="flex flex-col gap-y-2 items-center justify-center">
-                    <button 
-                        disabled={loggingIn} 
-                        className="cursor-pointer mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition"
-                        onClick={loginUser}
-                    >
-                        { loggingIn ? "Logging..." : "Login" }
-                    </button>
+                <div className="mt-4 flex items-center justify-between">
+                    <label className="flex items-center gap-2 text-sm">
+                        <input type="checkbox" className="h-4 w-4 rounded border-gray-300 bg-white/5" />
+                        <span className="text-white/80">Remember me</span>
+                    </label>
+                    <Link to="/forgot" className="text-sm underline text-white/80">Forgot?</Link>
+                </div>
 
-                    <Link to={"/sign-up"} className="underline">Sign up?</Link>
+                <div className="mt-6 flex flex-col gap-3">
+                    <Button variant="default" onClick={loginUser} disabled={loggingIn}>
+                        {loggingIn ? 'Logging...' : 'Sign in'}
+                    </Button>
+
+                    <div className="text-center text-sm text-white/80">
+                        Don’t have an account? <Link to="/sign-up" className="underline">Create one</Link>
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
+
 
 export default Login;

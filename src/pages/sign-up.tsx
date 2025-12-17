@@ -1,6 +1,8 @@
 import { useActionState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import { signup, type AuthRequestState} from "../actions/auth";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -19,56 +21,41 @@ const SignUp = () => {
     }, [state.success]);
 
     return (
-        <div className="flex items-center justify-center h-screen flex-col bg-gradient-to-b from-blue-900 to-black text-white">
-            <div className='fixed top-8 bg-[#fbfbf921] backdrop-blur-xl w-1/2 mx-auto p-4 rounded-full border-[0.01rem] border-white'>
-                <div className='flex items-center justify-between'>
-                    <h1>
-                        <Link to="/">EchoFind</Link>
-                    </h1>
-                </div>
+        <div className="flex items-center justify-center h-screen flex-col bg-gradient-to-b from-blue-900 to-black text-white px-4">
+            <div className='fixed top-6 left-1/2 -translate-x-1/2'>
+                <Link to="/" className="text-xl font-bold">EchoFind</Link>
             </div>
-            
-            <form action={formAction} className="w-[400px] p-5 mx-auto border border-white bg-[#fbfbf921] backdrop-blur-xl">
-                <h1 className="text-lg">Sign up</h1>
 
-                { state.success ? (
-                        <p className="text-green-600">{state.message}</p>
-                    ) : (
-                        <p className="text-red-600">{state.message}</p>
-                    ) 
-                }
-
-                <div className="mt-4 grid gap-y-4">
-                    <input 
-                        type="text" 
-                        name="username" 
-                        className="border w-full p-3 outline-none" 
-                        placeholder="Enter your username" 
-                        />
-                    <input 
-                        type="email" 
-                        name="email" 
-                        className="border w-full p-3 outline-none" 
-                        placeholder="Enter your email" 
-                        />
-                    <input 
-                        type="password" 
-                        name="password" 
-                        className="border w-full p-3 outline-none" 
-                        placeholder="Enter your password" 
-                    />
+            <form action={formAction} className="w-full max-w-md p-8 mx-auto rounded-xl shadow-xl bg-white/5 backdrop-blur-md border border-white/10">
+                <div className="mb-4">
+                    <h1 className="text-2xl font-semibold">Create your account</h1>
+                    <p className="text-sm text-white/80">Start using EchoFind with a free account</p>
                 </div>
 
-                <div className="flex flex-col gap-y-2 items-center justify-center">
-                    <button disabled={isPending} className="cursor-pointer mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition">
-                        {isPending ? "Signing" : "Sign up"}
-                    </button>
+                {state.message ? (
+                    <div className={`w-full p-3 rounded ${state.success ? 'bg-green-900/40 text-green-300' : 'bg-red-900/40 text-red-300'}`}>
+                        {state.message}
+                    </div>
+                ) : null}
 
-                    <Link to={"/login"} className="underline">Login?</Link>
+                <div className="mt-4 grid gap-y-3">
+                    <Input type="text" name="username" placeholder="Username" aria-label="username" />
+                    <Input type="email" name="email" placeholder="Email address" aria-label="email" />
+                    <Input type="password" name="password" placeholder="Password" aria-label="password" />
+                </div>
+
+                <div className="mt-6 flex flex-col gap-3">
+                    <Button variant="default" asChild={false} disabled={isPending}>
+                        <button type="submit" className="w-full">{isPending ? 'Creating...' : 'Create account'}</button>
+                    </Button>
+
+                    <div className="text-center text-sm text-white/80">
+                        Already have an account? <Link to="/login" className="underline">Sign in</Link>
+                    </div>
                 </div>
             </form>
         </div>
-    )
+    );
 }
 
 export default SignUp;
